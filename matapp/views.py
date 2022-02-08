@@ -7,5 +7,3 @@ from django.http import HttpResponse
 def browse(req):
     return render(req, 'matapp/browse.html')
 
-def main(req):
-    return render(req,'matapp/main.html')
