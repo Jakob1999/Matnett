@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabell oppskrift</title>
+    
+</head>
+<body onload="load()">
+<div id="myform">
+
+<label for="matrett">Matrett:</label>
+<input type="text" id="matrett" name="matrett"><br><br>
+
+<b>Legg til ingredienser her</b>
+<table>
+    <tr>
+        <td>Ingrediens:</td>
+        <td><input type="text" id="Ingrediens"></td>
+    </tr>
+    <tr>
+        <td>Mengde:</td>
+        <td><input type="text" id="Mengde">
+    </tr>
+    <tr>
+        <td>Måleenhet:</td>
+        <td><input type="text" id="Maleenhet">
+        <input type="button" id="add" value="Legg til" onclick="Javascript:addRow()"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+
+</div>
+<div id="mydata">
+
+<table id="myTableData"  border="1" cellpadding="2">
+
+    <tr>
+        <td>&nbsp;</td>
+        <td><b>Ingrediens</b></td>
+        <td><b>Mengde</b></td>
+        <td><b>Måleenhet</b></td>
+    </tr>
+</table>
+&nbsp;
+ 
+
+
+
+<label for="fremgangsmate">Fremgangsmåte:</label>
+<br>
+         <textarea rows = "5" cols = "60" name = "fremgangsmate" id="fremgangsmate">
+         </textarea><br>
+</div>
+
+</body>
+
+
+
+<script>
+
+
+function addRow() {
+          
+    var Ingrediens = document.getElementById("Ingrediens");
+    var Mengde = document.getElementById("Mengde");
+    var Maleenhet = document.getElementById("Maleenhet");
+    var table = document.getElementById("myTableData");
+ 
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+ 
+    row.insertCell(0).innerHTML= '<input type="button" value = "Delete" onClick="Javacsript:deleteRow(this)">';
+    row.insertCell(1).innerHTML= Ingrediens.value;
+    row.insertCell(2).innerHTML= Mengde.value;
+    row.insertCell(3).innerHTML= Maleenhet.value;
+ 
+}
+ 
+function deleteRow(obj) {
+      
+    var index = obj.parentNode.parentNode.rowIndex;
+    var table = document.getElementById("myTableData");
+    table.deleteRow(index);
+    
+}
+
+ 
+function load() {
+    
+    console.log("Page load finished");
+ 
+}
+</script>
+
+</html>
