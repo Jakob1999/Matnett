@@ -1,106 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oppskrift</title>
+    <title>Tabell oppskrift</title>
+    
 </head>
-<body>
+<body onload="load()">
+<div id="myform">
 
-<h2>Matrett 1</h2>
+<label for="matrett">Matrett:</label>
+<input type="text" id="matrett" name="matrett"><br><br>
 
-<table style="width:50%">
-<!-- Dette er header i tabellen> -->
-
-  <tr>
-    <th>Ingredienser</th>
-    <th>Mengde</th>
-  </tr>
-  
-<!-- Her kommer ingrediensene og mengder -->
-  <tr>
-    <td>Ingrediens 1</td>
-    <td>Mengde 1</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 2</td>
-    <td>Mengde 2</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 3</td>
-    <td>Mengde 3</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 4</td>
-    <td>Mengde 4</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 5</td>
-    <td>Mengde 5</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 6</td>
-    <td>Mengde 6</td>
-  </tr>
-  
-  
-  <tr>
-    <td>Ingrediens 7</td>
-    <td>Mengde 7</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 8</td>
-    <td>Mengde 8</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 9</td>
-    <td>Mengde 9</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 10</td>
-    <td>Mengde 10</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 11</td>
-    <td>Mengde 11</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 12</td>
-    <td>Mengde 12</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 13</td>
-    <td>Mengde 13</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 14</td>
-    <td>Mengde 14</td>
-  </tr>
-  
-  <tr>
-    <td>Ingrediens 15</td>
-    <td>Mengde 15</td>
-  </tr>
-  
-  
-
+<b>Legg til ingredienser her</b>
+<table>
+    <tr>
+        <td>Ingrediens:</td>
+        <td><input type="text" id="Ingrediens"></td>
+    </tr>
+    <tr>
+        <td>Mengde:</td>
+        <td><input type="text" id="Mengde">
+    </tr>
+    <tr>
+        <td>Måleenhet:</td>
+        <td><input type="text" id="Maleenhet">
+        <input type="button" id="add" value="Legg til" onclick="Javascript:addRow()"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
 </table>
 
-<p style="width:50%">  Fremgångsmåte her blablablablabla, bvlalblablalblalalblalblablalballbalablalblablalblabla</p>
+</div>
+<div id="mydata">
 
-    
+<table id="myTableData"  border="1" cellpadding="2">
+
+    <tr>
+        <td>&nbsp;</td>
+        <td><b>Ingrediens</b></td>
+        <td><b>Mengde</b></td>
+        <td><b>Måleenhet</b></td>
+    </tr>
+</table>
+&nbsp;
+ 
+
+
+
+<label for="fremgangsmate">Fremgangsmåte:</label>
+<br>
+         <textarea rows = "5" cols = "60" name = "fremgangsmate" id="fremgangsmate">
+         </textarea><br>
+</div>
+
 </body>
+
+
+
+<script>
+
+
+function addRow() {
+          
+    var Ingrediens = document.getElementById("Ingrediens");
+    var Mengde = document.getElementById("Mengde");
+    var Maleenhet = document.getElementById("Maleenhet");
+    var table = document.getElementById("myTableData");
+ 
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+ 
+    row.insertCell(0).innerHTML= '<input type="button" value = "Delete" onClick="Javacsript:deleteRow(this)">';
+    row.insertCell(1).innerHTML= Ingrediens.value;
+    row.insertCell(2).innerHTML= Mengde.value;
+    row.insertCell(3).innerHTML= Maleenhet.value;
+ 
+}
+ 
+function deleteRow(obj) {
+      
+    var index = obj.parentNode.parentNode.rowIndex;
+    var table = document.getElementById("myTableData");
+    table.deleteRow(index);
+    
+}
+
+ 
+function load() {
+    
+    console.log("Page load finished");
+ 
+}
+</script>
+
 </html>
