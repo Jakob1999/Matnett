@@ -1,0 +1,46 @@
+{% extends 'matapp/main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-color: rgb(153, 193, 238);
+    }
+
+    .container {
+        width: 500px;
+        margin: 0 auto;
+    }
+</style>
+
+<br>
+
+<div class="container">
+    <div class="card-body">
+        <h3>Navnet på oppskriften jeg nettopp trykte på</h3>
+    </div>
+    <div class="card card-body">
+        <img src="{% static 'images/oppskrift1.png' %}" class="img-fluid" alt="...">
+    </div>
+    <br>
+    <div class="article-metadata">
+        <a class="mr-2" href="#">Rebecca S</a>
+        <small class="text-muted">13. februar kl 22</small>
+    </div>
+    <br>
+    <div class="card card-body text-black ">
+        <p class="card-text">Oppskrift skal skrives her</p>
+        <p class="card-text"> </p>
+        <p class="card-text"> </p>
+        <p class="card-text"> </p>
+        <p class="card-text"> og her</p>
+        <p class="card-text"> </p>
+        <p class="card-text"> og litt mer her</p>
+        <p class="card-text"> </p>
+        <p class="card-text"> </p>
+        <p class="card-text"> </p>
+        <p class="card-text"> :D</p>
+    </div>
+</div>
+
+{% endblock %}
