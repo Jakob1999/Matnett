@@ -1,16 +1,32 @@
+{% extends 'matapp/main.html' %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html>
+
+<style>
+    body {
+        background-color: rgb(153, 193, 238);
+        line-height: 25px;
+    }
+
+
+</style>
+
+
 <head>
     <title>Tabell oppskrift</title>
     
 </head>
 <body onload="load()">
+<h1> Legg til oppskrift </h1>
+
 <div id="myform">
 
 <label for="matrett">Matrett:</label>
 <input type="text" id="matrett" name="matrett"><br><br>
-
-<b>Legg til ingredienser her</b>
+<b>Legg til ingredienser her:</b>
 <table>
     <tr>
         <td>Ingrediens:</td>
@@ -95,3 +111,5 @@ function load() {
 </script>
 
 </html>
+
+{% endblock %}
