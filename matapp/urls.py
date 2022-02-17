@@ -8,5 +8,7 @@ urlpatterns = [
     path('alert/', views.alert),
     path('recipe/', views.recipe),
     path('addRecipe/', views.addRecipe, name="addRecipe"),
-    path('recipe/<str:pk>/', views.recipe, name="recipe")
+    path('editRecipe/<str:pk>/', views.editRecipe, name="editRecipe"),
+    path('recipe/<str:pk>/', views.recipe, name="recipe"),
+    
 ]
