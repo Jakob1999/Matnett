@@ -7,5 +7,6 @@ urlpatterns = [
     path('profile/', views.profile),
     path('alert/', views.alert),
     path('recipe/', views.recipe),
-    path('addRecipe/', views.addRecipe)
+    path('addRecipe/', views.addRecipe, name="addRecipe"),
+    path('recipe/<str:pk>/', views.recipe, name="recipe")
 ]
