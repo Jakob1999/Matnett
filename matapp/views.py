@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
+from matapp.models import *
 # Create your views here.
 
 
-def browse(req):
-    return render(req, 'matapp/browse.html')
+def browse(request):
+    recipe = Recipe.objects.all()
+    return render(request, 'matapp/browse.html', {'recipe': recipe})
 
 
 def myrecipes(request):
@@ -19,7 +22,7 @@ def alert(request):
     return render(request, 'matapp/alert.html')
 
 
-def recipe(request):
+def recipe(request, PK):
     return render(request, 'matapp/recipe.html')
 
 

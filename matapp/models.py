@@ -14,8 +14,8 @@ class User(models.Model):
 class Recipe(models.Model):
     User = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200, null=True)
-    description = models.CharField(max_length=400, null=True, blank=True)
-    ingredients = models.CharField(max_length=400, null=True)
+    description = models.TextField()
+    ingredients = models.TextField()
 
     def __str__(self):
         return self.title
