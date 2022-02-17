@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from matapp.models import *
+from .forms import RecipeForm
 # Create your views here.
 
 
@@ -22,9 +23,19 @@ def alert(request):
     return render(request, 'matapp/alert.html')
 
 
-def recipe(request, PK):
-    return render(request, 'matapp/recipe.html')
+def recipe(request, pk):
+    current = Recipe.objects.get(id=pk)
+    return render(request, 'matapp/recipe.html', {'current': current})
 
 
 def addRecipe(request):
-    return render(request, 'matapp/addRecipe.html')
+
+    form = RecipeForm()
+    if request.method == 'POST':
+        form = RecipeForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect('/')
+
+    context = {'form':form}
+    return render(request, 'matapp/addRecipe.html', context)

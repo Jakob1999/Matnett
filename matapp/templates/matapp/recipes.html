@@ -20,7 +20,7 @@
 </div>
 <br> -->
 
-
+<a class="btn btn-primary" href="{% url 'addRecipe' %}">New Recipe</a>
 <br>
 <div class="row" >
     {% for i in recipe %}
@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{i.title}}</h4>
                         <p class="card-text">{{i.description}}</p>
-                        <a class="btn btn-primary" href="">Se oppskrift</a>
+                        <a class="btn btn-primary" href="{% url 'recipe' i.id %}">Se oppskrift</a>
                         <p class="card-text"> </p>
                         <div class="article-metadata">
                             <a class="mr-2">{{i.User}}</a>

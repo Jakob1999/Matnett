@@ -12,7 +12,7 @@ class User(models.Model):
         return self.name
 
 class Recipe(models.Model):
-    User = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    #User = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200, null=True)
     description = models.TextField()
     ingredients = models.TextField()

@@ -2,35 +2,32 @@
 {% load static %}
 
 {% block content %}
-<style>
-    body {
-        background-color: rgb(153, 193, 238);
-    }
+    <style>
+        body {
+            background-color: rgb(153, 193, 238);
+        }
 
-    .container {
-        width: 500px;
-        margin: 0 auto;
-    }
-</style>
-
-<br>
-{% for i in recipe %}
-<div class="container">
-    <div class="card-body">
-        <h3>{{i.title}}</h3>
-    </div>
-    <div class="card card-body">
-       <!---- <img src="{% static 'images/oppskrift1.png' %}" class="img-fluid" alt="...">-->
-    </div>
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
     <br>
-    <div class="article-metadata">
-        <a class="mr-2" href="#">{{i.User}}</a>
-        <small class="text-muted">13. februar kl 22</small>
+    <div class="container">
+        <div class="card-body">
+            <h3>{{current.title}}</h3>
+        </div>
+        <!--<div class="card card-body text-black">
+       <img src="{% static 'images/oppskrift1.png' %}" class="img-fluid" alt="...">
+        </div>-->
+        <br>
+        <div class="card card-body text-black ">
+            <p class="card-text">{{current.ingredients}}</p>
+        </div>
+        <br>
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{current.User}}</a>
+            <small class="text-muted">13. februar kl 22</small>
+        </div>
     </div>
-    <br>
-    <div class="card card-body text-black ">
-        <p class="card-text">{{u.recipe}}</p>
-    </div>
-</div>
-{% endfor %}
 {% endblock %}
