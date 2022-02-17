@@ -29,7 +29,6 @@ def recipe(request, pk):
 
 
 def addRecipe(request):
-
     form = RecipeForm()
     if request.method == 'POST':
         form = RecipeForm(request.POST)
@@ -37,5 +36,16 @@ def addRecipe(request):
             form.save()
             return redirect('/')
 
+    context = {'form':form}
+    return render(request, 'matapp/addRecipe.html', context)
+
+def editRecipe(request, pk):
+    recipe = Recipe.objects.get(id=pk)
+    form = RecipeForm(instance=recipe)
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, instance=recipe)
+        if form.is_valid:
+            form.save()
+            return redirect('/')
     context = {'form':form}
     return render(request, 'matapp/addRecipe.html', context)
