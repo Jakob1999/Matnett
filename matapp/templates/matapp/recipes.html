@@ -34,7 +34,7 @@
                         <a class="btn btn-primary" href="{% url 'recipe' i.id %}">Se oppskrift</a>
                         <p class="card-text"> </p>
                         <a class="btn btn-primary" href="{% url 'editRecipe' i.id %}">Edit</a>
-                        <a class="btn btn-danger" href="">Delete</a>
+                        <a class="btn btn-danger" href="{% url 'deleteRecipe' i.id %}">Delete</a>
                         <div class="article-metadata">
                             <a class="mr-2">{{i.User}}</a>
                             <small class="text-muted">13. februar kl 22</small>

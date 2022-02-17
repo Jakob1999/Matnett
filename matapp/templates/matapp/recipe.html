@@ -13,7 +13,7 @@
         }
     </style>
     <a class="btn btn-primary" href="{% url 'editRecipe' current.id %}">Edit</a>
-    <a class="btn btn-danger" href="">Delete</a>
+    <a class="btn btn-danger" href="{% url 'deleteRecipe' current.id %}">Delete</a>
     <br>
     <div class="container">
         <div class="card-body">

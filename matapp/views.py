@@ -49,3 +49,11 @@ def editRecipe(request, pk):
             return redirect('/')
     context = {'form':form}
     return render(request, 'matapp/addRecipe.html', context)
+
+def deleteRecipe(request, pk):
+    recipe = Recipe.objects.get(id=pk)
+    if request.method == "POST":
+        recipe.delete()
+        return redirect('/')
+    context = {'recipe':recipe}
+    return render(request, 'matapp/delete.html', context)
