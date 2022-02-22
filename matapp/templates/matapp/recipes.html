@@ -13,7 +13,7 @@
 
     .custom-checkbox {
         margin-left: 0.5em;
-        /* position: relative; */
+        position: relative;
         position: absolute;
         cursor: pointer;
     }
@@ -111,8 +111,10 @@
                     </figure>
                     <div class="card-body">
                         <h4 class="card-title">{{i.title}} 
-                            <label for="square1-checkbox" class="custom-checkbox">
-                                <input type="checkbox" id="square1-checkbox" />
+                            <label for="{{forloop.counter}}-checkbox" class="custom-checkbox">
+                                <!-- <label for="forloop" class="custom-checkbox"></label> -->
+                                <!-- <input type="checkbox" id="forloop" /> -->
+                                <input type="checkbox" id="{{forloop.counter}}-checkbox" />
                                 <i class="glyphicon glyphicon-star-empty"></i>
                                 <i class="glyphicon glyphicon-star"></i>
                             </label>
