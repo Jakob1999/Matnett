@@ -26,8 +26,7 @@
     {% for i in recipe %}
         <div class="col">
             <div class="col-md"> 
-                <div class="card text-center text-black mb-4" style="width: 18rem;" id="total-delivered">
-                   
+                <div class="card text-center text-black mb-4" style="width: 18rem;" id="total-delivered"> 
                     <div class="card-body">
                         <h4 class="card-title">{{i.title}}</h4>
                         <p class="card-text">{{i.description}}</p>
@@ -37,13 +36,11 @@
                         <a class="btn btn-danger" href="{% url 'deleteRecipe' i.id %}">Delete</a>
                         <div class="article-metadata">
                             <a class="mr-2">{{i.User}}</a>
-                            <small class="text-muted">13. februar kl 22</small>
+                            <small class="text-muted">{{i.date_created}}</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    
-    
     {% endfor %}
 </div>

@@ -24,12 +24,15 @@
         </div>-->
         <br>
         <div class="card card-body text-black ">
-            <p class="card-text">{{current.ingredients}}</p>
+        {% for line in current.ingredientsFormat %}
+            {{ line }}<br>
+        {% endfor %}
+            
         </div>
         <br>
         <div class="article-metadata">
             <a class="mr-2" href="#">{{current.User}}</a>
-            <small class="text-muted">13. februar kl 22</small>
+            <small class="text-muted">{{current.date_created}}</small>
         </div>
     </div>
 {% endblock %}
