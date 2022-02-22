@@ -1,29 +1,152 @@
 {% load static %}
 
+<style>
+    label {
+        /* Presentation */
+        font-size: 15px
+    }
+
+    /* Required Styling */
+    label input[type="checkbox"] {
+        display: none;
+    }
+
+    .custom-checkbox {
+        margin-left: 0.5em;
+        position: relative;
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .custom-checkbox .glyphicon {
+        color: gold;
+        position: absolute;
+        top: 0.11em;
+        left: 0em;
+        font-size: 1.3em;
+    }
+
+    .card-title {
+        margin: 15px;
+        font-size: 21px;
+    }
+
+    .custom-checkbox .glyphicon-star-empty {
+        color: gray;
+    }
+
+    .custom-checkbox .glyphicon-star {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .card-text {
+        font-size: 16px;
+    }
+
+    .custom-checkbox:hover .glyphicon-star {
+        opacity: 0.5;
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked~.glyphicon-star {
+        opacity: 1;
+    }
 
 
-<!-- <br> En anna form for poster:
-<div class="col">
-    <div class="col-md" style="width: 18rem;">
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">Rebecca S</a>
-                    <small class="text-muted">13. februar kl 22</small>
-                </div>
-                <img src="{% static 'images/t.jpg' %}" class="card-img-top" alt="..." class="img-thumbnail">
-                <h2><a class="article-title" href="#">Brownies</a></h2>
-                <p class="article-content">Skikkelig god kake</p>
-            </div>
-        </article>
-    </div>
-</div>
-<br> -->
 
-<a class="btn btn-primary" href="{% url 'addRecipe' %}">New Recipe</a>
+
+    .bg-image {
+        /* image specified in separate class below */
+        height: 240px;
+        width: 100%;
+    }
+
+    .bg-image-square1 {
+        
+        background-image: url("{% static 'images/oppskrift1.jpeg' %}");
+
+        /* lt ie8 */
+        -ms-background-position-x: center;
+        -ms-background-position-y: bottom;
+        background-position: center bottom;
+
+        /* scale bg image proportionately */
+        background-size: cover;
+
+        /* ie8 workaround - http://louisremi.github.io/background-size-polyfill/ */
+        -ms-behavior: url(/backgroundsize.min.htc);
+        /* prevent scaling past src width (or not) */
+        /* max-width: 1200px; */
+    }
+
+
+
+
+
+    @media only screen and (min-width : 1200px) {
+        .bg-image {
+            height: 300px;
+        }
+    }
+</style>
+
+<a class="btn btn-primary" href="{% url 'addRecipe' %}">Legg til ny oppskrift</a>
 <br>
-<div class="row" >
-    {% for i in recipe %}
+<br>
+
+
+<div>
+  
+    <div class="row">
+        {% for i in recipe %}
+        <div class="col">
+           
+            <div class="col-md">
+                <!-- Hver oppskrift må ha en id, slik at hvert card kan settes til å ha en unik id -->
+                <div class="card text-center text-black mb-4" style="width: 30rem;" id="square1">
+                    <!-- Hver oppskrift må kunne ha et bilde. Bildet linkes til under .bg-image-square1 css-blokken lenger oppe i denne filen-->
+                    <figure>
+                        <div class="bg-image bg-image-square1 bg-center-center">
+                        </div>
+                    </figure>
+                    <div class="card-body">
+                        <h4 class="card-title">{{i.title}} 
+                            <label for="{{forloop.counter}}-checkbox" class="custom-checkbox">
+                                <!-- <label for="forloop" class="custom-checkbox"></label> -->
+                                <!-- <input type="checkbox" id="forloop" /> -->
+                                <input type="checkbox" id="{{forloop.counter}}-checkbox" />
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                                <i class="glyphicon glyphicon-star"></i>
+                            </label>
+                        </h4>
+                        <p class="card-text">{{i.description}}</p>
+                        <a class="btn btn-primary" href="{% url 'recipe' i.id %}">Se oppskrift</a>
+                        <p class="card-text"> </p>
+                        <a class="btn btn-primary btn-sm" href="{% url 'editRecipe' i.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm"  href="{% url 'deleteRecipe' i.id %}">Delete</a>
+                        <br>
+                        <br>
+                        <div class="article-metadata">
+                            <a class="mr-2">{{i.User}}</a>
+                            <small class="text-muted">13. februar kl 22</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    
+
+
+
+</div>
+
+
+<!-- <div> Slik det var før det ble implementert med designet:
+    <div class="row">
+        {% for i in recipe %}
         <div class="col">
             <div class="col-md"> 
                 <div class="card text-center text-black mb-4" style="width: 18rem;" id="total-delivered"> 
@@ -43,4 +166,5 @@
             </div>
         </div>
     {% endfor %}
-</div>
+</div> -->
+
