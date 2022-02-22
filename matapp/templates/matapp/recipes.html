@@ -55,9 +55,6 @@
 
 
 
-
-
-
     .bg-image {
         /* image specified in separate class below */
         height: 240px;
@@ -65,6 +62,7 @@
     }
 
     .bg-image-square1 {
+        
         background-image: url("{% static 'images/oppskrift1.jpeg' %}");
 
         /* lt ie8 */
@@ -81,99 +79,76 @@
         /* max-width: 1200px; */
     }
 
-    .bg-image-square2 {
-        background-image: url("{% static 'images/oppskrift2.jpeg' %}");
 
-        /* lt ie8 */
-        -ms-background-position-x: center;
-        -ms-background-position-y: bottom;
-        background-position: center bottom;
 
-        /* scale bg image proportionately */
-        background-size: cover;
 
-        /* ie8 workaround - http://louisremi.github.io/background-size-polyfill/ */
-        -ms-behavior: url(/backgroundsize.min.htc);
-        /* prevent scaling past src width (or not) */
-        /* max-width: 1200px; */
-    }
-
-    .bg-image-square3 {
-        background-image: url("{% static 'images/oppskrift3.jpeg' %}");
-
-        /* lt ie8 */
-        -ms-background-position-x: center;
-        -ms-background-position-y: bottom;
-        background-position: center bottom;
-
-        /* scale bg image proportionately */
-        background-size: cover;
-
-        /* ie8 workaround - http://louisremi.github.io/background-size-polyfill/ */
-        -ms-behavior: url(/backgroundsize.min.htc);
-        /* prevent scaling past src width (or not) */
-        /* max-width: 1200px; */
-    }
-
-    .bg-image-square4 {
-        background-image: url("{% static 'images/oppskrift4.jpeg' %}");
-
-        /* lt ie8 */
-        -ms-background-position-x: center;
-        -ms-background-position-y: bottom;
-        background-position: center bottom;
-
-        /* scale bg image proportionately */
-        background-size: cover;
-
-        /* ie8 workaround - http://louisremi.github.io/background-size-polyfill/ */
-        -ms-behavior: url(/backgroundsize.min.htc);
-        /* prevent scaling past src width (or not) */
-        /* max-width: 1200px; */
-    }
-
-   
 
     @media only screen and (min-width : 1200px) {
         .bg-image {
             height: 300px;
         }
     }
-
 </style>
 
-<a class="btn btn-primary" href="{% url 'addRecipe' %}">New Recipe</a>
+<a class="btn btn-primary" href="{% url 'addRecipe' %}">Legg til ny oppskrift</a>
+<br>
 <br>
 
-<div class="row">
-    <div class="col">
-        <div class="col-md">
-            <div class="card text-center text-black mb-4" style="width: 30rem;" id="square1">
+
+<div>
+  
+    <div class="row">
+        {% for i in recipe %}
+        <div class="col">
+           
+            <div class="col-md">
+                <!-- Hver oppskrift må ha en id, slik at hvert card kan settes til å ha en unik id -->
+                <div class="card text-center text-black mb-4" style="width: 30rem;" id="square1">
+                    <!-- Hver oppskrift må kunne ha et bilde. Bildet linkes til under .bg-image-square1 css-blokken lenger oppe i denne filen-->
                     <figure>
                         <div class="bg-image bg-image-square1 bg-center-center">
                         </div>
                     </figure>
-                <div class="card-body">
-                    <h4 class="card-title">Gryterett
-                        <label for="square1-checkbox" class="custom-checkbox">
-                            <input type="checkbox" id="square1-checkbox" />
-                            <i class="glyphicon glyphicon-star-empty"></i>
-                            <i class="glyphicon glyphicon-star"></i>
-                        </label>
-                    </h4>
-                    <p class="card-text">Denne var fantastisk god. Prøv den selv! kfjnvldfnv lfkdmvldmv lkdmlvd lsdmlkd lksmdlv lkmlv lkmdlkmd lkmdl lksdml lksdml lkmdl</p>
-                    <br>
-                    <a href="#" class="btn btn-primary">Se oppskrift</a>
-                    <p class="card-text"> </p>
-                    <div class="article-metadata">
-                        <a class="mr-2" href="#">Rebecca S</a>
-                        <small class="text-muted">13. februar kl 22</small>
-<div class="row" >
-    {% for i in recipe %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{i.title}} 
+                            <label for="square1-checkbox" class="custom-checkbox">
+                                <input type="checkbox" id="square1-checkbox" />
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                                <i class="glyphicon glyphicon-star"></i>
+                            </label>
+                        </h4>
+                        <p class="card-text">{{i.description}}</p>
+                        <a class="btn btn-primary" href="{% url 'recipe' i.id %}">Se oppskrift</a>
+                        <p class="card-text"> </p>
+                        <a class="btn btn-primary btn-sm" href="{% url 'editRecipe' i.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm"  href="{% url 'deleteRecipe' i.id %}">Delete</a>
+                        <br>
+                        <br>
+                        <div class="article-metadata">
+                            <a class="mr-2">{{i.User}}</a>
+                            <small class="text-muted">13. februar kl 22</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    
+
+
+
+</div>
+
+
+<!-- <div> Slik det var før det ble implementert med designet:
+    <div class="row">
+        {% for i in recipe %}
         <div class="col">
-            <div class="col-md"> 
+            <div class="col-md">
                 <div class="card text-center text-black mb-4" style="width: 18rem;" id="total-delivered">
-                   
+
                     <div class="card-body">
                         <h4 class="card-title">{{i.title}}</h4>
                         <p class="card-text">{{i.description}}</p>
@@ -189,107 +164,7 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
     </div>
-    <div class="col">
-        <div class="col-md">
-            <div class="card text-center text-black mb-4" style="width: 30rem;" id="square2">
-
-                <figure>
-                    <div class="bg-image bg-image-square2 bg-center-center">
-                    </div>
-
-                </figure>
-
-                <!-- <img src="{% static 'images/oppskrift2.jpeg' %}" class="card-img-top" alt="..."> -->
-                <div class="card-body">
-                    <h4 class="card-title">Suppe
-                        <label for="square2-checkbox" class="custom-checkbox">
-                            <input type="checkbox" id="square2-checkbox" />
-                            <i class="glyphicon glyphicon-star-empty"></i>
-                            <i class="glyphicon glyphicon-star"></i>
-                        </label>
-                    </h4>
-                    <p class="card-text">God, men kanskje litt for spicy for min smak</p>
-                    <br>
-                    <a href="#" class="btn btn-primary">Se oppskrift</a>
-
-                    <p class="card-text"> </p>
-                    <div class="article-metadata">
-                        <a class="mr-2" href="#">Rebecca S</a>
-                        <small class="text-muted">13. februar kl 22</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="col-md">
-            <div class="card text-center text-black mb-4" style="width: 30rem;" id="square3">
-
-                <figure>
-                    <div class="bg-image bg-image-square3 bg-center-center">
-                    </div>
-
-                </figure>
-
-                <!-- <img src="{% static 'images/oppskrift3.jpeg' %}" class="card-img-top" alt="..."> -->
-                <div class="card-body">
-                    <h4 class="card-title">Pizza
-                        <label for="square3-checkbox" class="custom-checkbox">
-                            <input type="checkbox" id="square3-checkbox" />
-                            <i class="glyphicon glyphicon-star-empty"></i>
-                            <i class="glyphicon glyphicon-star"></i>
-                        </label>
-                    </h4>
-                    <p class="card-text">Som å være i Italia!! gleder meg masse til å lage denne flere ganger. kom på besøk på fredag så skal du få</p>
-                    <br>
-                    <a href="#" class="btn btn-primary">Se oppskrift</a>
-
-                    <p class="card-text"> </p>
-                    <div class="article-metadata">
-                        <a class="mr-2" href="#">Rebecca S</a>
-                        <small class="text-muted">13. februar kl 22</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="col-md">
-            <div class="card text-center text-black mb-4" style="width: 30rem;" id="square4">
-
-                <figure>
-                    <div class="bg-image bg-image-square4 bg-center-center">
-                    </div>
-                </figure>
-
-                <!-- <img src="{% static 'images/oppskrift1.jpeg' %}" class="card-img-top" alt="..."> -->
-                <div class="card-body">
-                    <h4 class="card-title">Gryterett
-                        <label for="square4-checkbox" class="custom-checkbox">
-                            <input type="checkbox" id="square4-checkbox" />
-                            <i class="glyphicon glyphicon-star-empty"></i>
-                            <i class="glyphicon glyphicon-star"></i>
-                        </label>
-                    </h4>
-                    <p class="card-text">Enda en slager, hele familien likte retten veldig godt</p>
-                    <br>
-                    <a href="#" class="btn btn-primary">Se oppskrift</a>
-
-                    <p class="card-text"> </p>
-                    <div class="article-metadata">
-                        <a class="mr-2" href="#">Rebecca S</a>
-                        <small class="text-muted">13. februar kl 22</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-=======
-    
-    
     {% endfor %}
-</div>
->>>>>>> main
+</div> -->
+
