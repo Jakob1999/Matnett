@@ -22,3 +22,6 @@ class CreateRecipe(TestCase):
         recipe = create_recipe('pizza','Sett på ovn\nRull ut deig\nTa på fyll\nStrø over ost\nStek'
                                ,'Pizzadeig, tomatsaus, skinke, ost',timezone.now())
         self.assertEqual(recipe.title,'pizza')
+        self.assertEqual(recipe.description, 'Sett på ovn\nRull ut deig\nTa på fyll\nStrø over ost\nStek')
+        self.assertEqual(recipe.ingredients,'Pizzadeig, tomatsaus, skinke, ost')
+        self.assertEqual(recipe.date_created, timezone.now())
