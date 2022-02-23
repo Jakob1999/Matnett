@@ -1,4 +1,6 @@
+from msilib.schema import CheckBox
 from random import choice
+from tkinter import Widget
 from django.db import models
 from django.forms import CharField
 
@@ -17,10 +19,10 @@ class Recipe(models.Model):
     description = models.TextField(null=True)
     ingredients = models.TextField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    
+    avatar = models.ImageField(null=True, default="defaultRecipe.jpg")
+
     def __str__(self):
         return self.title
     
     def ingredientsFormat(self):
         return self.ingredients.split('\n')
-

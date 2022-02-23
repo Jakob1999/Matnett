@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from xml.etree.ElementInclude import include
 from .models import Recipe
 from django import forms
 
@@ -10,5 +10,4 @@ class RecipeForm(forms.ModelForm):
         ))
      class Meta:
         model = Recipe
-        fields = '__all__'
-
+        fields = ['title','description', 'avatar', 'ingredients']

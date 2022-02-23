@@ -1,3 +1,4 @@
+from email.mime import image
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
@@ -8,7 +9,8 @@ from .forms import RecipeForm
 
 def browse(request):
     recipe = Recipe.objects.all()
-    return render(request, 'matapp/browse.html', {'recipe': recipe})
+    context = {'recipe':recipe}
+    return render(request, 'matapp/browse.html', context)
 
 
 def myrecipes(request):
@@ -31,7 +33,7 @@ def recipe(request, pk):
 def addRecipe(request):
     form = RecipeForm()
     if request.method == 'POST':
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         if form.is_valid:
             form.save()
             return redirect('/')
@@ -43,7 +45,7 @@ def editRecipe(request, pk):
     recipe = Recipe.objects.get(id=pk)
     form = RecipeForm(instance=recipe)
     if request.method == 'POST':
-        form = RecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid:
             form.save()
             return redirect('/')
