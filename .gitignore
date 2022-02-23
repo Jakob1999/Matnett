@@ -1,0 +1,19 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+media
+*/migrations
+
+# Virtualenv related
+bin/
+include/
+pip-selfcheck.json
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
