@@ -2,34 +2,70 @@
 {% load static %}
 
 {% block content %}
-    <style>
-        body {
-            background-color: rgb(153, 193, 238);
-        }
+<style>
+    body {
+        background-color: rgb(153, 193, 238);
+    }
 
-        .container {
-            width: 500px;
-            margin: 0 auto;
-        }
-    </style>
-    <a class="btn btn-primary" href="{% url 'editRecipe' current.id %}">Edit</a>
-    <a class="btn btn-danger" href="{% url 'deleteRecipe' current.id %}">Delete</a>
-    <br>
-    <div class="container">
-        <div class="card-body">
-            <h3>{{current.title}}</h3>
+    .col-md {
+        width: 500px;
+        margin: 0 auto;
+    }
+</style>
+<a class="btn btn-primary" href="{% url 'editRecipe' current.id %}">Edit</a>
+<a class="btn btn-danger" href="{% url 'deleteRecipe' current.id %}">Delete</a>
+<br>
+
+
+
+
+<div>
+    <div class="row">
+        <div class="col">
+            <div class="col-md" style="margin-left: 190px;">
+
+                <div class="card mb-2">
+                    
+                    <div class="card card-body text-black">
+                        <img src="{% static 'images/oppskrift1.png' %}" class="img-fluid" alt="...">
+                    </div>
+
+
+                </div>
+
+            </div>
+
         </div>
-        <!--<div class="card card-body text-black">
-       <img src="{% static 'images/oppskrift1.png' %}" class="img-fluid" alt="...">
-        </div>-->
-        <br>
-        <div class="card card-body text-black ">
-            <p class="card-text">{{current.ingredients}}</p>
+
+        <div class="col">
+            <div class="col-md" style="margin-right: 190px;">
+                <div class="card mb-2">
+
+                    <div class="card-body">
+                        <h3>{{current.title}}</h3>
+                    </div>
+                    <br>
+                    <!-- <div class=" card-body text-black "> -->
+                        <p class="card-text" style="margin-left: 10px;">{{current.ingredients}}</p>
+                    <!-- </div> -->
+
+                    <br>
+                    <div class="article-metadata">
+                        <a class="mr-2" href="#">{{current.User}}</a>
+                        <small class="text-muted" style="margin-left: 3px;">13. februar kl 22</small>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
         </div>
-        <br>
-        <div class="article-metadata">
-            <a class="mr-2" href="#">{{current.User}}</a>
-            <small class="text-muted">13. februar kl 22</small>
-        </div>
+
+
     </div>
+</div>
+
+
 {% endblock %}
