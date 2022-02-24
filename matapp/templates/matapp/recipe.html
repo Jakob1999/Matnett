@@ -9,7 +9,7 @@
 
     .col-md {
         width: 500px;
-        margin: 0 auto;
+        /* margin: 0 auto; */
     }
 </style>
 <a class="btn btn-primary" href="{% url 'editRecipe' current.id %}">Edit</a>
@@ -19,27 +19,45 @@
 <div>
     <div class="row">
         <div class="col">
-            <div class="col-md" style="margin-left: 190px;">
+            <div class="col-md" style="margin-left: 20%;">
                 <div class="card mb-2">
                     <div class="card card-body text-black">
-                        <img src="{% static 'images/oppskrift1.png' %}" class="img-fluid" alt="...">
+                        <img src="{{current.avatar.url}}" class="img-fluid" alt="...">
                     </div>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="col-md" style="margin-right: 190px;">
+            <div class="col-md" style="margin-right: 20%;">
                 <div class="card mb-2">
                     <div class="card-body">
-                        <h3>{{current.title}}</h3>
+                        <h2><b>{{current.title}}</b></h2>
                     </div>
+                </div>
+            </div>
+            <div class="col-md" style="margin-right: 20%;">
                     <br>
-                        <p class="card-text" style="margin-left: 10px;">{{current.ingredients}}</p>
+                    <div class="card mb-2">
+                    <div class="card-body">
+                        <br>
+                    <b style="margin-left: 10px;">Ingredienser</b>
+               
+                    <br><br>
+                        {% for line in current.ingredientsFormat %}
+                        <p class="card-text" style="margin-left: 20px;">{{line}}</p>
+                        {% endfor %}
+                   <br>
+                    <b style="margin-left: 10px;">Fremgangsmåte</b>
+                    <br><br>
+                    <p class="card-text" style="margin-left: 20px;">{{current.description}}</p>
+                    
                     <br>
-                    <div class="article-metadata">
+                    <div class="article-metadata" style="text-align: right;">
                         <a class="mr-2" href="#">{{current.User}}</a>
-                        <small class="text-muted" style="margin-left: 3px;">13. februar kl 22</small>
+                        <small class="text-muted" style="margin-right: 6px;">{{current.date_created}}</small>
                     </div>
+                </div>
+            </div>
                 </div>
             </div>
         </div>
