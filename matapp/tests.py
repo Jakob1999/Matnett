@@ -10,9 +10,10 @@ import datetime
 CONST_PIZZA_TODO = 'Sett på ovn\nRull ut deig\nTa på fyll\nStrø over ost\nStek'
 CONST_PIZZA_ITEM = 'Pizzadeig, tomatsaus, skinke, ost'
 TIME = timezone.localdate()
+PICTURE = 'defaultRecipe.jpg'
 
 
-def create_recipe(title, description, ingredients, date_created):
+def create_recipe(title, description, ingredients, date_created,avatar):
     """Lager en oppskrift som brukes i testingen
 
     Args:
@@ -22,7 +23,7 @@ def create_recipe(title, description, ingredients, date_created):
         date_created (DateTIMEField):
     """
     return Recipe.objects.create(title = title, ingredients = ingredients,
-                                 date_created=date_created, description = description)
+                                 date_created=date_created, description = description,avatar=avatar)
 
 class CreateRecipeObject(TestCase):
     def test_add_recipe(self):
@@ -32,10 +33,10 @@ class CreateRecipeObject(TestCase):
         Burde lage test som baserer seg på PK?
         """
         
-        recipe = create_recipe('pizza', CONST_PIZZA_TODO, CONST_PIZZA_ITEM,TIME)        
+        recipe = create_recipe('pizza', CONST_PIZZA_TODO, CONST_PIZZA_ITEM,TIME,PICTURE)        
         self.assertEqual(recipe.title,'pizza')
         recipe_two = create_recipe('taco','Stek kjøttdeig og krydder\nKutt opp grønnsaker\nS',
-                                   'Kjøttdeig, salat, ost, tortilla',TIME)
+                                   'Kjøttdeig, salat, ost, tortilla',TIME,None)
         self.assertEqual(recipe.title,'pizza')
         self.assertEqual(recipe_two.title,'taco')
         self.assertEqual(recipe.description, CONST_PIZZA_TODO)
@@ -47,9 +48,9 @@ class CreateRecipeObject(TestCase):
         """
         Endring av en recipe. Endrer variabler hver for seg. 
         """
-        recipe = create_recipe('pizza', CONST_PIZZA_TODO ,CONST_PIZZA_ITEM,TIME)
+        recipe = create_recipe('pizza', CONST_PIZZA_TODO ,CONST_PIZZA_ITEM,TIME,None)
         recipe_two = create_recipe('taco','Stek kjøttdeig og krydder\nKutt opp grønnsaker\nS',
-                                   'Kjøttdeig, salat, ost, tortilla',TIME)
+                                   'Kjøttdeig, salat, ost, tortilla',TIME,None)
         self.assertEqual(recipe.title,'pizza')
         recipe.title = 'Mafiapannekake'
         recipe_two.desciption = 'Alle kan lage taco'
@@ -60,7 +61,10 @@ class CreateRecipeObject(TestCase):
         
 class DatabaseTesting(TestCase):
     def create_recipe(self):
-        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME)
+        """
+        Lagrer et objekt i databasen.
+        """
+        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,PICTURE)
         recipe.save()
         self.assertEqual(recipe.objects.title,'pizza')
         self.assertEqual(recipe.objects.description,CONST_PIZZA_TODO)
@@ -69,7 +73,7 @@ class DatabaseTesting(TestCase):
         
         
     def edit_recipe(self):
-        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME)
+        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,)
         recipe.save()
         recipe.objects.title = 'Mafiapannekake'
         recipe.save()
@@ -80,9 +84,9 @@ class DatabaseTesting(TestCase):
         self.assertEqual(recipe.objects.ingredients, 'hvetemel,ost,tomat')
         
     def delete_recipe(self):
-        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME)
+        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,None)
         recipe.save()
-        recipe2 = Recipe('pizza2',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME)
+        recipe2 = Recipe('pizza2',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,None)
         recipe2.save()
         recipe.delete()
         self.assertIsNone(recipe.objects.title)
