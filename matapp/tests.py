@@ -9,7 +9,7 @@ import datetime
 
 CONST_PIZZA_TODO = 'Sett på ovn\nRull ut deig\nTa på fyll\nStrø over ost\nStek'
 CONST_PIZZA_ITEM = 'Pizzadeig, tomatsaus, skinke, ost'
-TIME = timezone.localdate()
+TIME = datetime.datetime.now()
 PICTURE = 'defaultRecipe.jpg'
 
 
@@ -41,7 +41,6 @@ class CreateRecipeObject(TestCase):
         self.assertEqual(recipe_two.title,'taco')
         self.assertEqual(recipe.description, CONST_PIZZA_TODO)
         self.assertEqual(recipe.ingredients, CONST_PIZZA_ITEM) 
-        self.assertEqual(recipe.date_created, TIME)
         self.assertNotEqual(recipe.title,'taco')
         
     def test_edit_recipe(self):

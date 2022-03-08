@@ -18,7 +18,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200, null=True)
     description = models.TextField(null=True)
     ingredients = models.TextField(null=True)
-    date_created = models.DateField(auto_now_add=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
     avatar = models.ImageField(null=True, default="defaultRecipe.jpg")
     
     def __str__(self):
