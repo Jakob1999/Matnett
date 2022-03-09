@@ -1,0 +1,32 @@
+{% extends 'matapp/main.html' %}
+
+{% block content %}
+    {% if page == 'login' %}
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input type="text"  name="username" placeholder="Enter Username"/>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Enter Password"/>
+
+            <input type="submit" value="login"/>
+        </form>
+        <p>Ikke registrert?</p>
+        <a href="{% url 'register' %}">Registrer</a>
+    </div>
+
+    {% else %}
+
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{RegForm.as_p}}
+            <input type="submit" value="register"/>
+        </form>
+        <p>Allerede registrert?</p>
+        <a href="{% url 'login' %}">Logg inn</a>
+    </div>
+    {% endif %}
+{% endblock content %}
