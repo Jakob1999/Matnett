@@ -12,8 +12,10 @@
         /* margin: 0 auto; */
     }
 </style>
-<a class="btn btn-primary" href="{% url 'editRecipe' current.id %}">Edit</a>
-<a class="btn btn-danger" href="{% url 'deleteRecipe' current.id %}">Delete</a>
+{% if request.user == current.Host %}
+    <a class="btn btn-primary" href="{% url 'editRecipe' current.id %}">Edit</a>
+    <a class="btn btn-danger" href="{% url 'deleteRecipe' current.id %}">Delete</a>
+{% endif %}
 <br>
 
 <div>

@@ -120,15 +120,16 @@
                         
                         </h4>
                         <p id="demo"></p>
-                        <p class="card-text">{{i.description}}</p>
                         <a class="btn btn-primary" href="{% url 'recipe' i.id %}">Se oppskrift</a>
                         <p class="card-text"> </p>
-                        <a class="btn btn-primary btn-sm" href="{% url 'editRecipe' i.id %}">Edit</a>
-                        <a class="btn btn-danger btn-sm"  href="{% url 'deleteRecipe' i.id %}">Delete</a>
+                        {% if request.user == i.Host %}
+                            <a class="btn btn-primary btn-sm" href="{% url 'editRecipe' i.id %}">Edit</a>
+                            <a class="btn btn-danger btn-sm"  href="{% url 'deleteRecipe' i.id %}">Delete</a>
+                        {% endif %}
                         <br>
                         <br>
                         <div class="article-metadata">
-                            <a class="mr-2">{{i.User}}</a>
+                            <a class="mr-2">{{i.Host}}</a>
                             <small class="text-muted">{{i.date_created}}</small>
                         </div>
                     </div>
