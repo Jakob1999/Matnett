@@ -109,16 +109,22 @@
                         <img class="bg-image bg-image-square1 bg-center-center" src="{{i.avatar.url}}"/>
                     </figure>
                     <div class="card-body">
-                        <h4 class="card-title">{{i.title}}
-                            <label for="{{i.id}}-checkbox" class="custom-checkbox">
-                                <!-- <label for="forloop" class="custom-checkbox"></label> -->
-                                <!-- <input type="checkbox" id="forloop" /> -->
+                        <h4 class="card-title">{{i.title}}</h4>
+                            {% if user in i.favorite.all %}
+                            <a href="{% url 'addFavorite' i.id %}" class="btn btn-outline-primary">Fjern fra favoritt</a>
+                            <label for="{{i.id}}-checkbox" class="custom-checkbox" >
+                                <input type="checkbox" id="{{i.id}}-checkbox" checked/>
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                                <i class="glyphicon glyphicon-star"></i>
+                            </label>
+                            {% else %}
+                            <a href="{% url 'addFavorite' i.id %}" class="btn btn-outline-primary">Legg til favoritt</a>
+                            <label for="{{i.id}}-checkbox" class="custom-checkbox" >
                                 <input type="checkbox" id="{{i.id}}-checkbox"/>
                                 <i class="glyphicon glyphicon-star-empty"></i>
                                 <i class="glyphicon glyphicon-star"></i>
                             </label>
-                        
-                        </h4>
+                            {% endif %}
                         <p id="demo"></p>
                         <a class="btn btn-primary" href="{% url 'recipe' i.id %}">Se oppskrift</a>
                         <p class="card-text"> </p>

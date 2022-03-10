@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
@@ -67,6 +68,15 @@ def browse(request):
     recipe = Recipe.objects.all()
     context = {'recipe':recipe}
     return render(request, 'matapp/browse.html', context)
+@login_required
+def addFavorite(request, pk):
+    fav = get_object_or_404(Recipe, id=pk)
+    if fav.favorite.filter(id=request.user.id).exists():
+        fav.favorite.remove(request.user.id)
+    else:
+        fav.favorite.add(request.user.id)
+    return redirect('home')
+
 
 @login_required(login_url='login')
 def myrecipes(request):
