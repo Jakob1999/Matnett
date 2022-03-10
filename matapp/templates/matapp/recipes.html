@@ -1,5 +1,4 @@
 {% load static %}
-
 <style>
     label {
         /* Presentation */
@@ -90,13 +89,14 @@
     }
 </style>
 
+
+
+{% block content %}
 <a class="btn btn-primary" style="margin-left: 16px;" href="{% url 'addRecipe' %}">+ Legg til ny oppskrift</a>
 <br>
 <br>
 
-
 <div>
-  
     <div class="row">
         {% for i in recipe %}
         <div class="col">
@@ -136,7 +136,7 @@
                         <br>
                         <div class="article-metadata">
                             <a class="mr-2">{{i.Host}}</a>
-                            <small class="text-muted">{{i.date_created}}</small>
+                            <a class="mr-3"><small>{{i.date_created}}</small></a>
                         </div>
                     </div>
                 </div>
@@ -150,29 +150,5 @@
 
 
 </div>
-
-
-<!-- <div> Slik det var før det ble implementert med designet:
-    <div class="row">
-        {% for i in recipe %}
-        <div class="col">
-            <div class="col-md"> 
-                <div class="card text-center text-black mb-4" style="width: 18rem;" id="total-delivered"> 
-                    <div class="card-body">
-                        <h4 class="card-title">{{i.title}}</h4>
-                        <p class="card-text">{{i.description}}</p>
-                        <a class="btn btn-primary" href="{% url 'recipe' i.id %}">Se oppskrift</a>
-                        <p class="card-text"> </p>
-                        <a class="btn btn-primary" href="{% url 'editRecipe' i.id %}">Edit</a>
-                        <a class="btn btn-danger" href="{% url 'deleteRecipe' i.id %}">Delete</a>
-                        <div class="article-metadata">
-                            <a class="mr-2">{{i.User}}</a>
-                            <small class="text-muted">{{i.date_created}}</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-</div> -->
+{% endblock content %}
 

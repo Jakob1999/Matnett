@@ -68,6 +68,8 @@ def browse(request):
     recipe = Recipe.objects.all()
     context = {'recipe':recipe}
     return render(request, 'matapp/browse.html', context)
+
+
 @login_required
 def addFavorite(request, pk):
     fav = get_object_or_404(Recipe, id=pk)
@@ -79,21 +81,38 @@ def addFavorite(request, pk):
 
 
 @login_required(login_url='login')
-def myrecipes(request):
-    return render(request, 'matapp/myrecipes.html')
+def profile(request, pk):
+    bruker = User.objects.get(id=pk)
+    recipes = Recipe.objects.all()
+    context = {'bruker':bruker, 'recipes':recipes}
+    return render(request, 'matapp/profile.html', context)
+
 
 @login_required(login_url='login')
-def profile(request):
-    return render(request, 'matapp/profile.html')
+def myRecipes(request, pk):
+    bruker = User.objects.get(id=pk)
+    recipes = Recipe.objects.all()
+    context = {'bruker':bruker, 'recipes':recipes}
+    return render(request, 'matapp/myrecipes.html', context)
+
+
+@login_required(login_url='login')
+def favorites(request, pk):
+    bruker = User.objects.get(id=pk)
+    recipes = Recipe.objects.all()
+    context = {'bruker':bruker, 'recipes':recipes}
+    return render(request, 'matapp/favorites.html', context)
 
 
 def alert(request):
     return render(request, 'matapp/alert.html')
 
+
 @login_required(login_url='login')
 def recipe(request, pk):
     current = Recipe.objects.get(id=pk)
     return render(request, 'matapp/recipe.html', {'current': current})
+
 
 @login_required(login_url='login')
 def addRecipe(request):
@@ -108,6 +127,7 @@ def addRecipe(request):
 
     context = {'form':form}
     return render(request, 'matapp/addRecipe.html', context)
+
 
 @login_required(login_url='login')
 def editRecipe(request, pk):
@@ -125,6 +145,7 @@ def editRecipe(request, pk):
     context = {'form':form}
     return render(request, 'matapp/addRecipe.html', context)
 
+
 @login_required(login_url='login')
 def deleteRecipe(request, pk):
     recipe = Recipe.objects.get(id=pk)
@@ -137,3 +158,4 @@ def deleteRecipe(request, pk):
         return redirect('/')
     context = {'recipe':recipe}
     return render(request, 'matapp/delete.html', context)
+

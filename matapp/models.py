@@ -13,6 +13,7 @@ class Recipe(models.Model):
     avatar = models.ImageField(null=True, default="defaultRecipe.jpg")
     created = models.DateTimeField(auto_now_add=True)
     favorite = models.ManyToManyField(User, related_name="favorite", blank=True)
+    
     class Meta:
         ordering = ['-created']
 

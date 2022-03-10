@@ -1,5 +1,10 @@
 {% load static %}
 
+<head>
+
+  <link rel="stylesheet" type="text/css" href="{% static '/css/nav.css' %}">
+
+</head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" style="font-size: 22px; margin-left: 7px;" href="#">MatNett</a>
@@ -14,6 +19,15 @@
         {% if request.user.is_authenticated %}
           <p style="color:white">{{request.user}}</p>
           <a href="{% url 'logout' %}">Logout</a>
+          <div class="dropdown">
+            <button class="dropbtn">Profil &nbsp <i class="arrow down" ></i></button>
+            <div class="dropdown-content">
+              <a href="{% url 'profile' request.user.id %}">Profil</a>
+              <a href="{% url 'myRecipes' request.user.id %}">Mine oppskrifter</a>
+              <a href="{% url 'favorites' request.user.id %}">Mine Favoritter</a>
+            </div>
+          </div>
+          
         {% else %}
         
         {% endif %}
