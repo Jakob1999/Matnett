@@ -169,7 +169,7 @@ def addToHandleliste(request, pk):
         liste.handleliste.remove(request.user.id)
     else:
         liste.handleliste.add(request.user.id)
-    return redirect('home')
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @login_required(login_url='login')
