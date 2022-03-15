@@ -1,0 +1,126 @@
+body {
+    background-color: rgb(56, 55, 55);
+}
+
+
+
+label {
+    /* Presentation */
+    font-size: 15px
+}
+
+/* Required Styling */
+label input[type="checkbox"] {
+    display: none;
+}
+
+
+.form{
+    color: white;
+}
+.custom-checkbox {
+    margin-left: 0.5em;
+    position: relative;
+    position: absolute;
+    cursor: pointer;
+}
+
+.custom-checkbox .glyphicon {
+    color: gold;
+    position: absolute;
+    top: 0.11em;
+    left: 0em;
+    font-size: 1.3em;
+}
+
+.out{
+    text-emphasis-color: red;
+}
+
+.card{
+    background-color: #343a40;
+    box-shadow:  0 4px 8px 0 rgba(255, 250, 250, 0.2), 0 6px 20px 0 rgba(255, 250, 250, 0.2);
+    
+}
+
+.card-title {
+    margin: 15px;
+    font-size: 21px;
+    color: white;
+}
+
+.card-body{
+    background-color: #343a40;
+}
+
+.custom-checkbox .glyphicon-star-empty {
+    color: white;
+}
+
+
+
+.custom-checkbox .glyphicon-star {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.card-text {
+    font-size: 16px;
+}
+
+.custom-checkbox:hover .glyphicon-star {
+    opacity: 0.5;
+}
+
+.custom-checkbox input[type="checkbox"]:checked~.glyphicon-star {
+    opacity: 1;
+}
+
+
+
+
+.bg-image {
+    /* image specified in separate class below */
+    height: 240px;
+    width: 100%;
+}
+
+.bg-image-square1 {
+    
+    /*background-image: url("{% static 'images/oppskrift1.jpeg' %}");*/
+
+    /* lt ie8 */
+    -ms-background-position-x: center;
+    -ms-background-position-y: bottom;
+    background-position: center bottom;
+
+    /* scale bg image proportionately */
+    background-size: cover;
+
+    /* ie8 workaround - http://louisremi.github.io/background-size-polyfill/ */
+    -ms-behavior: url(/backgroundsize.min.htc);
+    /* prevent scaling past src width (or not) */
+    /* max-width: 1200px; */
+}
+
+
+
+
+
+@media only screen and (min-width : 1200px) {
+    .bg-image {
+        height: 300px;
+    }
+}
+
+
+
+.col-md {
+    width: 500px;
+    /* margin: 0 auto; */
+}
+
+
+.article-metadata{
+    color: white;
+}
