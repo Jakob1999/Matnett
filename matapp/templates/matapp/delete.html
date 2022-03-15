@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <p>Er du sikker på at du vil slette oppskriften for "{{recipe}}"?</p>
+    <p class="form">Er du sikker på at du vil slette oppskriften for "{{recipe}}"?</p>
 
     <form action="{% url 'deleteRecipe' recipe.id %}" method="POST">
         {% csrf_token %}

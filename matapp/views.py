@@ -67,7 +67,7 @@ def registerUser(request):
 def browse(request):
     recipe = Recipe.objects.all()
     context = {'recipe':recipe}
-    return render(request, 'matapp/browse.html', context)
+    return render(request, 'matapp/recipes.html', context)
 
 
 @login_required
@@ -78,6 +78,13 @@ def addFavorite(request, pk):
     else:
         fav.favorite.add(request.user.id)
     return redirect('home')
+
+@login_required(login_url='login')
+def favorites(request, pk):
+    bruker = User.objects.get(id=pk)
+    recipes = Recipe.objects.all()
+    context = {'bruker':bruker, 'recipes':recipes}
+    return render(request, 'matapp/favorites.html', context)
 
 
 @login_required(login_url='login')
@@ -96,12 +103,7 @@ def myRecipes(request, pk):
     return render(request, 'matapp/myrecipes.html', context)
 
 
-@login_required(login_url='login')
-def favorites(request, pk):
-    bruker = User.objects.get(id=pk)
-    recipes = Recipe.objects.all()
-    context = {'bruker':bruker, 'recipes':recipes}
-    return render(request, 'matapp/favorites.html', context)
+
 
 
 def alert(request):
@@ -159,3 +161,26 @@ def deleteRecipe(request, pk):
     context = {'recipe':recipe}
     return render(request, 'matapp/delete.html', context)
 
+
+@login_required
+def addToHandleliste(request, pk):
+    liste = get_object_or_404(Recipe, id=pk)
+    if liste.handleliste.filter(id=request.user.id).exists():
+        liste.handleliste.remove(request.user.id)
+    else:
+        liste.handleliste.add(request.user.id)
+    return redirect('home')
+
+
+@login_required(login_url='login')
+def handleliste(request, pk):
+    bruker = User.objects.get(id=pk)
+    iListe = Recipe.objects.all()
+    context = {'iListe':iListe, 'bruker':bruker}
+    return render(request, 'matapp/handleliste.html', context)
+
+
+##Det som mangler:
+##  bytting mellom dark og light mode
+##  kategorisering
+##  favorisering uten at siden refreshes?

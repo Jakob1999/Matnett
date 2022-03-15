@@ -3,15 +3,11 @@
 
 {% block content %}
 
-<style>
-     body {
-            background-color: rgb(153, 193, 238);
-        }
-</style>
-
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.as_p}}
+    <div class="form">
+        {{form.as_p}}
+    </div>  
 
     <input type="submit" name="Submit">
 </form>

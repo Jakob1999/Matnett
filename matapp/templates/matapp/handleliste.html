@@ -1,0 +1,36 @@
+{% extends 'matapp/main.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+  
+    <div class="row">
+        
+                <div class="col">
+                    <div class="col-md">
+                        <div class="card text-center text-black mb-4" style="width: 30rem;" id="square1">
+                            <div class="card-body">
+                                <h3><u>{{request.user}}s handleliste</u></h3>
+                                <br>
+                                {% for recipe in iListe %}
+                                    {% if request.user in recipe.handleliste.all %}
+                                        <h4 class="card-title">{{recipe.title}}</h4>
+                                            {% for line in recipe.ingredientsFormat %}
+                                                <p class="card-text">{{line}}</p>
+                                            {% endfor %}
+                                        <br>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+    </div>
+    
+
+
+
+</div>
+{% endblock %} 

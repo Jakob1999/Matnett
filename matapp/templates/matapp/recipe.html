@@ -2,16 +2,6 @@
 {% load static %}
 
 {% block content %}
-<style>
-    body {
-        background-color: rgb(153, 193, 238);
-    }
-
-    .col-md {
-        width: 500px;
-        /* margin: 0 auto; */
-    }
-</style>
 {% if request.user == current.Host %}
     <a class="btn btn-primary" href="{% url 'editRecipe' current.id %}">Edit</a>
     <a class="btn btn-danger" href="{% url 'deleteRecipe' current.id %}">Delete</a>

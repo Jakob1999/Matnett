@@ -15,7 +15,10 @@ urlpatterns = [
     path('editRecipe/<str:pk>/', views.editRecipe, name="editRecipe"),
     path('recipe/<str:pk>/', views.recipe, name="recipe"),
     path('deleteRecipe/<str:pk>/', views.deleteRecipe, name="deleteRecipe"),
-    path('addFavorite/<int:pk>/', views.addFavorite, name="addFavorite"),
-
+    path('addFavorite/<str:pk>/', views.addFavorite, name="addFavorite"),
+    path('profile/handleliste/<str:pk>/', views.handleliste, name="handleliste"),
+    path('addToHandleliste/<str:pk>/', views.addToHandleliste, name="addToHandleliste"),
+    
     
 ]
+
