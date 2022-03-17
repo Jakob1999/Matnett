@@ -81,7 +81,7 @@ def addFavorite(request, pk):
         fav.favorite.remove(request.user.id)
     else:
         fav.favorite.add(request.user.id)
-    return redirect('home')
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url='login')
 def favorites(request, pk):
