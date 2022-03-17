@@ -14,9 +14,10 @@
                                 <!--Noe mer info om bruker :)-->
                     </div>
                 </div>
+                {% if request.user.username == 'admin' %}
                 <div class="card text-center text-black mb-4" style="width: 30rem;" id="square1">
                     <div class="card-body">
-                        {% if request.user.username == 'admin' %}
+                        
                             <a href="http://127.0.0.1:8000/admin">Admin Panel</a>
                         {% endif %}
                     </div>
