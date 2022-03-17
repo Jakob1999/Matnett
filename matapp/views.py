@@ -31,7 +31,7 @@ def loginPage(request):
         try:
             user = User.objects.get(username=Username)
         except:
-            messages.error(request, 'Bruker finnes ikke')
+            None
 
         user = authenticate(request, username=Username, password=Password)
 
@@ -53,13 +53,16 @@ def registerUser(request):
 
     if request.method == 'POST':
         RegForm = UserCreationForm(request.POST)
-        if RegForm.is_valid:
-            user = RegForm.save(commit=False)
-            RegForm.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'Noe gikk galt under registrering')
+        try: 
+            if RegForm.is_valid:
+                user = RegForm.save(commit=False)
+                RegForm.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                None
+        except:
+           messages.error(request, 'Noe gikk galt under registrering')
     
     context = {'RegForm':RegForm, 'page':page}
     return render(request, 'matapp/registration_login.html', context)
