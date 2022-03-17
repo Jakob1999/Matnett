@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
+from .filters import RecipeFilter
 # Create your views here.
 
 
@@ -31,14 +32,14 @@ def loginPage(request):
             user = User.objects.get(username=Username)
         except:
             messages.error(request, 'Bruker finnes ikke')
+
         user = authenticate(request, username=Username, password=Password)
 
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-             messages.error(request, 'Brukernavn eller passord finnes ikke')
-
+            messages.error(request, 'Brukernavn eller passord er feil')
     context = {'page':page}
     return render(request, 'matapp/registration_login.html', context)
 
@@ -58,15 +59,18 @@ def registerUser(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Noe gikk galt under registrering :(')
+            messages.error(request, 'Noe gikk galt under registrering')
     
-    context = {'RegForm':RegForm}
+    context = {'RegForm':RegForm, 'page':page}
     return render(request, 'matapp/registration_login.html', context)
 
 @login_required(login_url='login')
 def browse(request):
+    
     recipe = Recipe.objects.all()
-    context = {'recipe':recipe}
+    myFilter = RecipeFilter(request.GET, queryset=recipe)
+    recipe = myFilter.qs
+    context = {'recipe':recipe, 'myFilter':myFilter}
     return render(request, 'matapp/recipes.html', context)
 
 
@@ -136,9 +140,6 @@ def editRecipe(request, pk):
     recipe = Recipe.objects.get(id=pk)
     form = RecipeForm(instance=recipe)
 
-    if request.user != recipe.Host:
-        return HttpResponse('Du får ikke lov')
-
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid:
@@ -151,9 +152,6 @@ def editRecipe(request, pk):
 @login_required(login_url='login')
 def deleteRecipe(request, pk):
     recipe = Recipe.objects.get(id=pk)
-
-    if request.user != recipe.Host:
-        return HttpResponse('Du får ikke lov')
 
     if request.method == "POST":
         recipe.delete()
@@ -172,12 +170,15 @@ def addToHandleliste(request, pk):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+
 @login_required(login_url='login')
 def handleliste(request, pk):
+    
     bruker = User.objects.get(id=pk)
     iListe = Recipe.objects.all()
     context = {'iListe':iListe, 'bruker':bruker}
     return render(request, 'matapp/handleliste.html', context)
+
 
 
 ##Det som mangler:

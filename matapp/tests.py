@@ -13,7 +13,7 @@ TIME = datetime.datetime.now()
 PICTURE = 'defaultRecipe.jpg'
 
 
-def create_recipe(title, description, ingredients, date_created,avatar):
+def create_recipe(title, description, ingredients, date_created,bilde):
     """Lager en oppskrift som brukes i testingen
 
     Args:
@@ -23,7 +23,7 @@ def create_recipe(title, description, ingredients, date_created,avatar):
         date_created (DateTIMEField):
     """
     return Recipe.objects.create(title = title, ingredients = ingredients,
-                                 date_created=date_created, description = description,avatar=avatar)
+                                 date_created=date_created, description = description,bilde=bilde)
 
 class CreateRecipeObject(TestCase):
     def test_add_recipe(self):
