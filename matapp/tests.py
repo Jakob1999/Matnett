@@ -1,3 +1,6 @@
+#from json import load
+from turtle import title
+from urllib import response
 from django.test import RequestFactory, TestCase
 from django.contrib.auth.models import AnonymousUser, User
 
@@ -6,12 +9,14 @@ from .models import Recipe
 from django.utils import timezone
 from django.test.utils import setup_test_environment
 import datetime
+from .views import *
 
 
 CONST_PIZZA_TODO = 'Sett på ovn\nRull ut deig\nTa på fyll\nStrø over ost\nStek'
 CONST_PIZZA_ITEM = 'Pizzadeig, tomatsaus, skinke, ost'
 TIME = datetime.datetime.now()
 PICTURE = 'defaultRecipe.jpg'
+
 
 
 def create_recipe(title, description, ingredients, date_created,bilde):
@@ -28,13 +33,14 @@ def create_recipe(title, description, ingredients, date_created,bilde):
 
         
 class CreateRecipeObject(TestCase):
+    
     def test_add_recipe(self):
         """
         Sjekker at tittel og andre deler i modellen oppfører seg som forventet.
         TODO
         Burde lage test som baserer seg på PK?
+
         """
-        
         recipe = create_recipe('pizza', CONST_PIZZA_TODO, CONST_PIZZA_ITEM,TIME,PICTURE)        
         self.assertEqual(recipe.title,'pizza')
         recipe_two = create_recipe('taco','Stek kjøttdeig og krydder\nKutt opp grønnsaker\nS',
@@ -59,58 +65,5 @@ class CreateRecipeObject(TestCase):
         self.assertEqual(recipe.title,'Mafiapannekake')
         self.assertEqual(recipe_two.desciption, 'Alle kan lage taco')
         
-        
-class DatabaseTesting(TestCase):
-    def create_recipe(self):
-        """
-        Lagrer et objekt i databasen.
-        """
-        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,PICTURE)
-        recipe.save()
-        self.assertEqual(recipe.objects.title,'pizza')
-        self.assertEqual(recipe.objects.description,CONST_PIZZA_TODO)
-        self.assertEqual(recipe.objects.ingredients,CONST_PIZZA_ITEM)
-        self.assertEqual(recipe.objects.date_created,TIME)
-        
-        
-    def edit_recipe(self):
-        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,)
-        recipe.save()
-        recipe.objects.title = 'Mafiapannekake'
-        recipe.save()
-        self.assertNotEqual(recipe.objects.title,'pizza')
-        self.assertEqual(recipe.objects.title,'Mafiapannekake')
-        recipe.objects.ingredients = 'hvetemel,ost,tomat'
-        recipe.save()
-        self.assertEqual(recipe.objects.ingredients, 'hvetemel,ost,tomat')
-        
-    def delete_recipe(self):
-        recipe = Recipe('pizza',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,None)
-        recipe.save()
-        recipe2 = Recipe('pizza2',CONST_PIZZA_TODO,CONST_PIZZA_ITEM,TIME,None)
-        recipe2.save()
-        recipe.delete()
-        self.assertIsNone(recipe.objects.title)
-        self.assertIsNotNone(recipe2.objects.title)
-        
-class DatabaseTestingSprintTwo(TestCase):
-    
-    def create_recipe_full(Host, title, description, ingredients, date_created,
-                           bilde, favorite, handleliste, KATEGORIER):
-        return Recipe.objects.create(Host=Host, title=title, description=description, ingredients=ingredients, date_created=date_created,
-                           bilde=bilde, favorite=favorite, handleliste=handleliste, KATEGORIER=KATEGORIER)
-        
-    def setUp(self):
-        # Every test needs access to the request factory.
-        self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='jakob', email='jakob@…', password='carry_pete')
 
-    def test_add_to_favorites(self):
-
-        return None
-    def test_remove_from_favorites(self):
-        return None
-    def add_to_shoppingcart(self):
-        return None
     

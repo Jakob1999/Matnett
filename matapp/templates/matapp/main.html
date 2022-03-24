@@ -29,11 +29,16 @@
     
     <div class="container-fluid">
         {% block content %}
-        
+    
 
         {% endblock %}
     </div>
 </body>
+<style>
+    body {
+        background-color: rgb(153, 193, 238);
+    }
+</style>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) { 
         var scrollpos = localStorage.getItem('scrollpos');
