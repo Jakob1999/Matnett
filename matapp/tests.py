@@ -1,4 +1,5 @@
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
+from django.contrib.auth.models import AnonymousUser, User
 
 from matapp.views import deleteRecipe
 from .models import Recipe
@@ -25,6 +26,7 @@ def create_recipe(title, description, ingredients, date_created,bilde):
     return Recipe.objects.create(title = title, ingredients = ingredients,
                                  date_created=date_created, description = description,bilde=bilde)
 
+        
 class CreateRecipeObject(TestCase):
     def test_add_recipe(self):
         """
@@ -90,3 +92,25 @@ class DatabaseTesting(TestCase):
         recipe.delete()
         self.assertIsNone(recipe.objects.title)
         self.assertIsNotNone(recipe2.objects.title)
+        
+class DatabaseTestingSprintTwo(TestCase):
+    
+    def create_recipe_full(Host, title, description, ingredients, date_created,
+                           bilde, favorite, handleliste, KATEGORIER):
+        return Recipe.objects.create(Host=Host, title=title, description=description, ingredients=ingredients, date_created=date_created,
+                           bilde=bilde, favorite=favorite, handleliste=handleliste, KATEGORIER=KATEGORIER)
+        
+    def setUp(self):
+        # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='jakob', email='jakob@…', password='carry_pete')
+
+    def test_add_to_favorites(self):
+
+        return None
+    def test_remove_from_favorites(self):
+        return None
+    def add_to_shoppingcart(self):
+        return None
+    
